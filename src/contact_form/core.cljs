@@ -1,7 +1,8 @@
 (ns contact-form.core
     (:require
       [reagent.core :as r]
-      [reagent.dom :as d]))
+      [reagent.dom :as d]
+      [contact-form.components.input-element :refer [input-element]]))
 
 ;; -------------------------
 ;; Views
@@ -18,16 +19,6 @@
   ]
 )
 
-(defn input-element
-  "An input element which updates its value on change"
-  [id name type value]
-  [:input {:id id
-           :name name
-           :class "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-           :type type
-           :required true
-           :value @value}])
-
 (defn home-page []
   (let [email-address (atom nil) phone-address (atom nil)]
     (fn []
@@ -43,12 +34,12 @@
                 ]
 
                 [:div.mb-4 
-                  [:label {:class="block text-gray-700 text-sm font-bold mb-2"} "Email"]
+                  [:label {:class "block text-gray-700 text-sm font-bold mb-2"} "Email"]
                   [input-element "email" "email" "email" email-address]
                 ]
 
                 [:div.mb-4 
-                  [:label {:class="block text-gray-700 text-sm font-bold mb-2"} "Phone Number"]
+                  [:label {:class "block text-gray-700 text-sm font-bold mb-2"} "Phone Number"]
                   [input-element "phone" "phone" "phone" phone-address]
                 ]
 
