@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "serve": "npx shadow-cljs watch app",
+    "build": "npx shadow-cljs release app"
+  },
   "devDependencies": {
     "shadow-cljs": "^2.19.2"
   },
