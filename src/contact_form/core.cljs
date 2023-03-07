@@ -1,5 +1,8 @@
 (ns contact-form.core
     (:require
+      [reitit.frontend :as rf]
+      [reitit.frontend.easy :as rfe]
+      [reitit.coercion.spec :as rss]      
       [reagent.core :as r]
       [reagent.dom :as d]
       [contact-form.components.input-element :refer [input-element]]))
@@ -58,7 +61,18 @@
 ;; -------------------------
 ;; Initialize app
 
+(defonce match (r/atom nil))
+
+(def routes
+  [["/" {:name ::home-page :view home-page}]
+   ["/contact-page" {:name ::contact-page :view home-page} ]])
+
 (defn mount-root []
+  (rfe/start!
+      (rf/router routes {:data {:coercion rss/coercion}})
+      (fn [m] (reset! match m))
+      ;; set to false to enable HistoryAPI
+      {:use-fragment true})
   (d/render [home-page] (.getElementById js/document "app")))
 
 (defn ^:export init! []
