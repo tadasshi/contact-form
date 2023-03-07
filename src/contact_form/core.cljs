@@ -28,14 +28,6 @@
            :required true
            :value @value}])
 
-(defn email-input
-  [email-address-atom]
-  (input-element "email" "email" "email" email-address-atom))
-
-(defn phone-input
-  [phone-atom]
-  (input-element "phone" "phone" "phone" phone-atom))
-
 (defn home-page []
   (let [email-address (atom nil) phone-address (atom nil)]
     (fn []
@@ -52,12 +44,12 @@
 
                 [:div.mb-4 
                   [:label {:class="block text-gray-700 text-sm font-bold mb-2"} "Email"]
-                  [email-input email-address]
+                  [input-element "email" "email" "email" email-address]
                 ]
 
                 [:div.mb-4 
                   [:label {:class="block text-gray-700 text-sm font-bold mb-2"} "Phone Number"]
-                  [phone-input phone-address]
+                  [input-element "phone" "phone" "phone" phone-address]
                 ]
 
                 [:button  {:on-click #(reset! contact-submitted true) :class "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" } "Submit"]
